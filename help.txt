@@ -1,0 +1,35 @@
+Fazer Count alguma coisa
+ - Número de postes iluminação
+ - Número de número ponto de ônibus
+Viagem ocorrida dentro do municipio de SP?
+Criar variável "Viagem realizada Entre 8pm - 4 am?"
+Criar variável "Viagem realizada Entre 11pm - 2 am?"
+Distância a um poligno
+
+FEATURES
+# Idade
+# Renda
+# Sexo
+# Possui auto?
+# Distãncia até metro, trem, terminal
+# Emprego / Estuda / ambos
+# Escolaridade
+
+# PROBLEMA 1
+# Geração de Viagens
+
+# Features clássicas
+# Acessibilidade: Uso do solos, quantos empregos/bares eu atinjo dentro de um raio
+
+
+# PROBLEMA 2
+# Escolha Modal
+
+# Features clássicas
+# Motivo da viagem
+# Diferença de cotas
+# Distãncia até metro, trem, terminal (Origem)
+# Distãncia até metro, trem, terminal (Destino)
+# Distãncia até metro, trem, terminal (Média Harmonica)
+# Horário da viagem
+

@@ -1,0 +1,4 @@
+2021-01-28 20:40:08.787 | DEBUG    | __main__:<module>:20 - That's it, beautiful and simple logging!
+2021-01-28 20:40:32.087 | DEBUG    | __main__:<module>:20 - That's it, beautiful and simple logging!
+2021-01-28 21:05:07.127 | DEBUG    | __main__:<module>:43 - Arquivo OD_2017.parquet salvo em data/processed/
+2021-01-28 21:05:07.128 | DEBUG    | __main__:<module>:44 - Tudo ocorreu bem!

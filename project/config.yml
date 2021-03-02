@@ -1,0 +1,59 @@
+DATAPREP:
+  SELECT_COLUMNS:
+    # Domicílio
+    - Zona de domicílio
+    - Município do domicílio
+    - Coordenada X domicílio
+    - Coordenada Y domicílio
+    - Identifica domicílo
+    - Data da entrevista
+    - Tipo de domicílio
+    - Possui água encanada?
+    - A rua é pavimentada?
+    - Total de famílias no domicílio
+    - Total de moradores na família
+    - Condição de moradia # Própria
+    - Quantidade de banheiros
+    - Quantidade de empregados domésticos
+    - Quantidade de automóveis
+    - Quantidade de motocicletas
+    - Quantidade de bicicletas
+    - Critério de Classificação Econônica Brasil
+    - Pontos Critério Brasil
+    - Renda familiar mensal
+    # Pessoa
+    - Identifica pessoa # ID Pessoa
+    - Situação familiar # Responsável/Conjugue
+    - Idade
+    - Gênero
+    - Estuda atualmente?
+    - Grau de instrução
+    - Condição de atividade
+    - Valor da renda individual
+    # Viagem
+    - Número da viagem
+    - Dia da Semana
+    - Total de viagens da pessoa
+    - Coordenada X Origem
+    - Coordenada Y Origem
+    - Coordenada X Destino
+    - Coordenada Y Destino
+    - Motivo na Origem
+    - Motivo no Destino
+    - Servir passageiro na Origem
+    - Servir passageiro no Destino
+    - Modo 1
+    - Modo 2
+    - Modo 3
+    - Modo 4
+    - Hora Saída
+    - Minuto Saída
+    - Tempo Andando na Origem
+    - Hora Chegada
+    - Minuto Chegada
+    - Tempo Andando no Destino
+    - Duração da Viagem (em minutos)
+    - Modo Principal
+    - Número de ordem do registro #ID
+
+

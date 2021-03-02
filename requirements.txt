@@ -1,0 +1,9 @@
+descartes
+geopandas
+matplotlib
+pandas
+pyyaml
+pyreadstat
+pyarrow
+loguru
+scikit-learn
