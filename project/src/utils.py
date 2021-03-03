@@ -7,9 +7,11 @@ from typing import Any
 import geopandas as gpd
 import pandas as pd
 from geopandas.geodataframe import GeoDataFrame
+from numpy import ndarray
 from pandas.core.frame import DataFrame
 from shapely.geometry import Point
-from shapely.ops import nearest_points
+from shapely.geometry.multilinestring import MultiLineString
+from shapely.ops import nearest_points, unary_union
 
 
 def convert_label(df: DataFrame, meta: Any, columns: bool = True, labels: bool = True) -> DataFrame:
@@ -56,7 +58,7 @@ def geo_prep_to_join(gdf: GeoDataFrame, col: str) -> GeoDataFrame:
     return gdf.drop(columns=["geometry"]).rename(columns={col: "geometry"})
 
 
-def get_counting(gdf: GeoDataFrame, gdf_ref: GeoDataFrame, buffer: int, col_ref: str, idx: list, col_return: str = "count") -> GeoDataFrame:
+def get_counting(gdf: GeoDataFrame, gdf_ref: GeoDataFrame, buffer: int, col_ref: str, idx: list, col_return: str = "count") -> ndarray:
     '''
     Dado um 'gdf' contendo POINTS, cria-se um buffer cuja intersecção com 'gdf_ref'
     realiza-se contagem
@@ -74,3 +76,16 @@ def get_counting(gdf: GeoDataFrame, gdf_ref: GeoDataFrame, buffer: int, col_ref:
     df_join_aux = pd.DataFrame(gpd_join.groupby(idx)[col_return].sum())
     # Joins entre o DataFrame auxiliar criado com a contagem com 'gdf' original
     return gdf.set_index(idx).merge(df_join_aux, on=idx)[col_return].values
+
+
+def prep_ciclo_shp(gdf: GeoDataFrame, distance_to_consider: float, col_str: str = "Descriptio") -> MultiLineString:
+    '''Preparação do shapefile da ciclovia
+
+    Criamos a coluna 'lenght_km' a partir de uma regex da descrição da ciclovia
+    Filtramos considerando uma certo 'lenght_km' que julgamos ideal
+    Por fim, criamos uma união de todas as linha e retornamos um MultiLineString.
+    '''
+    pattern = r'Extensão: ([0-9]{1,2},*[0-9]{1,2}?)'
+    gdf["lenght_km"] = gdf[col_str].str.replace("km", ",0").str.extract(pattern)[0].str.replace(",", ".").astype(float)
+    gdf = gdf[gdf["lenght_km"] > distance_to_consider]
+    return unary_union(gdf["geometry"])
