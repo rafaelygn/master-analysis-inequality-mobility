@@ -55,14 +55,18 @@ def geo_prep_to_join(gdf: GeoDataFrame, col: str) -> GeoDataFrame:
     Caso tenha um GeoDataFrame com mais de um 'geometry' é necessário deletar o 'geometry' original
     e renomear o outro geometry para 'geometry'
     '''
-    return gdf.drop(columns=["geometry"]).rename(columns={col: "geometry"})
+    try:
+        return gdf.drop(columns=["geometry"]).rename(columns={col: "geometry"})
+    except KeyError:
+        return gdf.rename(columns={col: "geometry"})
 
 
-def get_counting(gdf: GeoDataFrame, gdf_ref: GeoDataFrame, buffer: int, col_ref: str, idx: list, col_return: str = "count") -> ndarray:
+def get_counting(gdf: GeoDataFrame, gdf_ref: GeoDataFrame, geocol: str, buffer: int, col_ref: str, idx: list, col_return: str = "count") -> ndarray:
     '''
     Dado um 'gdf' contendo POINTS, cria-se um buffer cuja intersecção com 'gdf_ref'
     realiza-se contagem
     '''
+    gdf = geo_prep_to_join(gdf, geocol)
     gdf["buffer_geo"] = gdf.buffer(buffer)
     # Intersecção entre o buffer
     gpd_join = gpd.sjoin(geo_prep_to_join(gdf, "buffer_geo"),
@@ -89,3 +93,14 @@ def prep_ciclo_shp(gdf: GeoDataFrame, distance_to_consider: float, col_str: str 
     gdf["lenght_km"] = gdf[col_str].str.replace("km", ",0").str.extract(pattern)[0].str.replace(",", ".").astype(float)
     gdf = gdf[gdf["lenght_km"] > distance_to_consider]
     return unary_union(gdf["geometry"])
+
+
+def data_info(dataset):
+    info = pd.DataFrame()
+    info["var"] = dataset.columns
+    info["# missing"] = list(dataset.isnull().sum())
+    info["% missing"] = info["# missing"] / dataset.shape[0] * 100
+    info["types"] = list(dataset.dtypes)
+    info["unique values"] = list(
+        len(dataset[var].unique()) for var in dataset.columns)
+    return info

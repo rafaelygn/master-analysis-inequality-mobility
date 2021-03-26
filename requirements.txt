@@ -7,3 +7,4 @@ pyreadstat
 pyarrow
 loguru
 scikit-learn
+statsmodels

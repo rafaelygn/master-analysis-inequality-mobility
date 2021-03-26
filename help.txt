@@ -1,10 +1,15 @@
-Fazer Count alguma coisa
+Preprocessamento:
+Pegar apenas viagens dentro do municipio de São Paulo
+
+Fazer Count alguma coisa --> DONE
  - Número de postes iluminação
  - Número de número ponto de ônibus
-Viagem ocorrida dentro do municipio de SP?
 Criar variável "Viagem realizada Entre 8pm - 4 am?"
 Criar variável "Viagem realizada Entre 11pm - 2 am?"
-Distância a um poligno
+
+Variáveis de Acessilidade --> DONE
+Está por microregião
+
 
 FEATURES
 # Idade
@@ -33,3 +38,57 @@ FEATURES
 # Distãncia até metro, trem, terminal (Média Harmonica)
 # Horário da viagem
 
+Default Param
+
+Main Features:
+                                            Importance
+loc_domicilio_count_ilum_std                 44.875510
+loc_domicilio_count_parada                   20.461935
+Estuda atualmente?__outros_                   3.157726
+loc_domicilio_dist_metro                      3.043695
+loc_domicilio_dist_term                       3.019762
+Condição de atividade_Tem Trabalho Regular    2.871199
+loc_domicilio_dist_trem                       2.498702
+loc_domicilio_ACC_TP_A_E_60M                  2.352742
+per Renda familiar mensal                     2.339769
+loc_domicilio_dist_ciclo                      2.207776
+----Train---
+MAE: 0.15
+MSE: 0.07
+R2: 0.97
+---- Test ---
+MAE: 0.41
+MSE: 0.46
+R2: 0.81
+
+
+Linear Regressor
+
+----Train---
+MAE: 0.75
+MSE: 1.07
+R2: 0.56
+---- Test ---
+MAE: 0.75
+MSE: 1.06
+R2: 0.57
+
+
+Poisson Regressor
+
+----Train---
+MAE: 0.88
+MSE: 3.49
+R2: -0.43
+---- Test ---
+MAE: 0.88
+MSE: 2.32
+R2: 0.06
+
+
+Correlação
+Escolher essas duas
+60_TI
+TP_Lazer
+
+Ponto >> Considerar frequência e linhas

@@ -55,5 +55,210 @@ DATAPREP:
     - Duração da Viagem (em minutos)
     - Modo Principal
     - Número de ordem do registro #ID
+  COUNTING_TRIPS:
+    SELECT_COLUMNS:
+      # Domicílio
+      - Zona de domicílio
+      - Data da entrevista
+      - Coordenada X domicílio
+      - Coordenada Y domicílio
+      # - Tipo de domicílio
+      - Condição de moradia # Própria
+      - Pontos Critério Brasil
+      # - Renda familiar mensal
+      # Pessoa
+      - Identifica pessoa # ID Pessoa
+      - Situação familiar # Responsável/Conjugue
+      - Idade
+      - Gênero
+      - Estuda atualmente?
+      - Grau de instrução
+      - Condição de atividade
+      # - Valor da renda individual
+      # Viagem
+      # - Dia da Semana
+      - Total de viagens da pessoa
+      # Novas Variáveis
+      - loc_domicilio_count_parada
+      # - loc_domicilio_count_ilum_led
+      - loc_domicilio_count_ilum_std
+      - loc_domicilio_dist_metro
+      - loc_domicilio_dist_trem
+      - loc_domicilio_dist_term
+      - loc_domicilio_dist_ciclo
+      - loc_domicilio_ACC_TI_A_E_60M
+      - loc_domicilio_ACC_TP_A_E_60M
+      - loc_domicilio_ACC_TI_A_L_TI_
+      - loc_domicilio_ACC_TI_A_L_TP_
+      - per Quantidade de automóveis
+      - per Quantidade de motocicletas
+      - per Quantidade de bicicletas
+      - per Renda familiar mensal
+    IDX:
+      - Identifica pessoa
+      - Zona de domicílio
+      - Data da entrevista
+      - Coordenada X domicílio
+      - Coordenada Y domicílio
+    LABEL:
+      - Total de viagens da pessoa
+    ENCODING:
+      Condição de moradia:
+        - Própria
+        - Alugada
+      Situação familiar:
+        - Pessoa responsável
+        - Filho(a)/ enteado(a)
+        - Conjugê/ companheiro(a)
+      Estuda atualmente?:
+        - Não
+        - 1º grau/ Fundamental
+        - Superior/ Universitário
+    CATEGORICAL:
+      - Condição de moradia
+      - Situação familiar
+      - Gênero
+      - Estuda atualmente?
+      - Grau de instrução
+      - Condição de atividade
+  COUNTING_TRIPS_LEISURE:
+    REASONS:
+      # - Assuntos Pessoais
+      - Compras
+      - Recreação/Visitas/Lazer
+      - Refeição
+      # - Médico/Dentista/Saúde
+    SELECT_COLUMNS:
+      # Domicílio
+      - Zona de domicílio
+      - Data da entrevista
+      - Coordenada X domicílio
+      - Coordenada Y domicílio
+      # - Tipo de domicílio
+      - Condição de moradia # Própria
+      - Pontos Critério Brasil
+      # - Renda familiar mensal
+      # Pessoa
+      - Identifica pessoa # ID Pessoa
+      - Situação familiar # Responsável/Conjugue
+      - Idade
+      - Gênero
+      - Estuda atualmente?
+      - Grau de instrução
+      - Condição de atividade
+      # - Valor da renda individual
+      # Viagem
+      # - Dia da Semana
+      # - Total de viagens da pessoa
+      # Novas Variáveis
+      - loc_domicilio_count_parada
+      # - loc_domicilio_count_ilum_led
+      # - loc_domicilio_count_ilum_std
+      - loc_domicilio_dist_metro
+      - loc_domicilio_dist_trem
+      - loc_domicilio_dist_term
+      - loc_domicilio_dist_ciclo
+      - loc_domicilio_ACC_TI_A_E_60M
+      - loc_domicilio_ACC_TP_A_E_60M
+      - loc_domicilio_ACC_TI_A_L_TI_
+      - loc_domicilio_ACC_TI_A_L_TP_
+      - per Quantidade de automóveis
+      - per Quantidade de motocicletas
+      - per Quantidade de bicicletas
+      - per Renda familiar mensal
+    IDX:
+      - Identifica pessoa
+      - Zona de domicílio
+      - Data da entrevista
+      - Coordenada X domicílio
+      - Coordenada Y domicílio
+    LABEL:
+      - Total Motivo Interesse
+    ENCODING:
+      Condição de moradia:
+        - Própria
+        - Alugada
+      Situação familiar:
+        - Pessoa responsável
+        - Filho(a)/ enteado(a)
+        - Conjugê/ companheiro(a)
+      Estuda atualmente?:
+        - Não
+        - 1º grau/ Fundamental
+        - Superior/ Universitário
+    CATEGORICAL:
+      - Condição de moradia
+      - Situação familiar
+      - Gênero
+      - Estuda atualmente?
+      - Grau de instrução
+      - Condição de atividade
+  COUNTING_TRIPS_NIGHT:
+    SELECT_COLUMNS:
+      # Domicílio
+      - Zona de domicílio
+      - Data da entrevista
+      - Coordenada X domicílio
+      - Coordenada Y domicílio
+      # - Tipo de domicílio
+      - Condição de moradia # Própria
+      - Pontos Critério Brasil
+      # - Renda familiar mensal
+      # Pessoa
+      - Identifica pessoa # ID Pessoa
+      - Situação familiar # Responsável/Conjugue
+      - Idade
+      - Gênero
+      - Estuda atualmente?
+      - Grau de instrução
+      - Condição de atividade
+      # - Valor da renda individual
+      # Viagem
+      # - Dia da Semana
+      # - Total de viagens da pessoa
+      # Novas Variáveis
+      - loc_domicilio_count_parada
+      # - loc_domicilio_count_ilum_led
+      # - loc_domicilio_count_ilum_std
+      - loc_domicilio_dist_metro
+      - loc_domicilio_dist_trem
+      - loc_domicilio_dist_term
+      - loc_domicilio_dist_ciclo
+      - loc_domicilio_ACC_TI_A_E_60M
+      - loc_domicilio_ACC_TP_A_E_60M
+      - loc_domicilio_ACC_TI_A_L_TI_
+      - loc_domicilio_ACC_TI_A_L_TP_
+      - per Quantidade de automóveis
+      - per Quantidade de motocicletas
+      - per Quantidade de bicicletas
+      - per Renda familiar mensal
+    IDX:
+      - Identifica pessoa
+      - Zona de domicílio
+      - Data da entrevista
+      - Coordenada X domicílio
+      - Coordenada Y domicílio
+    LABEL:
+      - Total Viagens Noturnas
+    ENCODING:
+      Condição de moradia:
+        - Própria
+        - Alugada
+      Situação familiar:
+        - Pessoa responsável
+        - Filho(a)/ enteado(a)
+        - Conjugê/ companheiro(a)
+      Estuda atualmente?:
+        - Não
+        - 1º grau/ Fundamental
+        - Superior/ Universitário
+    CATEGORICAL:
+      - Condição de moradia
+      - Situação familiar
+      - Gênero
+      - Estuda atualmente?
+      - Grau de instrução
+      - Condição de atividade
+
 
 

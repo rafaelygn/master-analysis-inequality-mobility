@@ -1,6 +1,8 @@
 import geopandas as gpd
+import pandas as pd
 
 from pandas.core.frame import DataFrame
+from geopandas.geodataframe import GeoDataFrame
 from numpy import ndarray
 from sklearn.neighbors import KNeighborsRegressor
 
@@ -18,6 +20,14 @@ def fit_knn(df, n_neighbors: int) -> KNeighborsRegressor:
     return knn
 
 
-def predict_knn(X: DataFrame, n_neighbors: int) -> ndarray:
+def decode_to_dataframe(gdp_raw: GeoDataFrame, col: str) -> DataFrame:
+    x = gdp_raw[col].apply(lambda pos: pos.x)
+    y = gdp_raw[col].apply(lambda pos: pos.y)
+    d = {"x": x, "y": y}
+    return pd.DataFrame(d)
+
+
+def predict_knn(gdp_raw: GeoDataFrame, col: str, n_neighbors: int) -> ndarray:
     knn = fit_knn(df_relevo, n_neighbors)
+    X = decode_to_dataframe(gdp_raw, col)
     return knn.predict(X)
