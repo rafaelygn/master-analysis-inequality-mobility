@@ -50,8 +50,8 @@ dataset = dataset.set_index(idx)
 # Filling missing valuies with mean
 dataset.fillna(dataset.mean(), inplace=True)
 # Filtra por Outros
-dataset["Estuda atualmente?"] = dataset["Estuda atualmente?"].apply(
-    lambda x: x if x == "Não" else "Sim")
+# dataset["Estuda atualmente?"] = dataset["Estuda atualmente?"].apply(
+#     lambda x: x if x == "Não" else "Sim")
 for k, v in enc_others.items():
     dataset[k] = dataset[k].apply(lambda x: x if x in v else "_outros_")
 # OneHotCoding

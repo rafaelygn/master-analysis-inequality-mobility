@@ -77,7 +77,7 @@ def read_gis_files():
     # Tratamento da iluminação
     gdf_ilumin_led = gdf_ilumin[gdf_ilumin["il_tipo"] == "LED"]
     gdf_ilumin_std = gdf_ilumin[gdf_ilumin["il_tipo"] != "LED"]
-    gdf_ilumin_std = gdf_ilumin_std.sample(frac=.15, random_state=42)
+    # gdf_ilumin_std = gdf_ilumin_std.sample(frac=.15, random_state=42)
     print(f"Loading light pole sample. Rows loaded: {gdf_ilumin_std.shape[0]}")
     return mulipoint_metro, mulipoint_trem, mulipoint_term, gdf_parada, gdf_ilumin_led, gdf_ilumin_std, multiline_ciclo
 
