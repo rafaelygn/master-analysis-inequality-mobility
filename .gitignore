@@ -1,6 +1,10 @@
 venv/
-data/
+data/counting_trips/**
+data/discrete_choice/**
+data/how_far/**
+data/processed/**
 .vscode/
 **/.ipynb_checkpoints/**
+**/.ipynb_checkpoints
 **/__pycache__/**
 *.log

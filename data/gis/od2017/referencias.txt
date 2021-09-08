@@ -1,0 +1,6 @@
+Os mapas (em formato shape) do zoneamento da Pesquisa Origem e Destino 2017 seguem com as seguintes especificações:
+
+- Sistema de Coordenadas: UTM - SAD69
+- Datum horizontal: Córrego Alegre (23) [EPSG:22523]
+- Digitalização: Planimétrica
+- Erro admissível: até 10 (dez) metros
