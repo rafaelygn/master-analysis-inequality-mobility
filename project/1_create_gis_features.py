@@ -10,7 +10,7 @@ from src.cota_knn import predict_knn
 from src.utils import (geo_prep_to_join, get_counting, get_distance,
                        nearest_point_value, prep_ciclo_shp)
 
-PATH_PROJECT = "/home/yoshraf/projects/mestrado/"
+PATH_PROJECT = "/home/yoshraf/projects/master-analysis-inequality-mobility/"
 
 GEO_DOM = ["Coordenada X domicílio", "Coordenada Y domicílio"]
 GEO_ORI = ["Coordenada X Origem", "Coordenada Y Origem"]
@@ -28,7 +28,7 @@ PER = "Total de moradores na família"
 
 df = pd.read_parquet(f"{PATH_PROJECT}data/processed/OD_2017.parquet")
 df_muni = gpd.read_file(
-    f"{PATH_PROJECT}data/gis/od2017/Municipios_2017_region.shp")
+    f"{PATH_PROJECT}data/gis/od2017/Zonas_2017_region.shp")
 
 
 def create_gis_point(df_raw: pd.DataFrame, dict_gis: dict) -> pd.DataFrame:
@@ -189,13 +189,14 @@ def main_features_gis_acc(gdf: GeoDataFrame, dict_gis: dict) -> GeoDataFrame:
     return gdf
 
 
-def main():
+def main(sample=False):
     start = time.time()
     print("Create main location gis points")
     gdf_gis_final = create_gis_point(df, DICT_GIS)
     print(gdf_gis_final.shape)
-    # print("Sampling...")
-    # gdf_gis_final = gdf_gis_final.sample(40_000)
+    if sample:
+        print("Sampling...")
+        gdf_gis_final = gdf_gis_final.sample(40_000)
     print("Filtering by São Paulo City")
     gdf_gis_final = filter_sp(gdf_gis_final, DICT_GIS)
     print("Creating socioeconomic features")
@@ -219,4 +220,5 @@ def main():
 
 # Execute main function
 if __name__ == "__main__":
-    main()
+    main(False)
+

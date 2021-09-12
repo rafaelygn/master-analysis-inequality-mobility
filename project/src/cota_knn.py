@@ -6,9 +6,12 @@ from geopandas.geodataframe import GeoDataFrame
 from numpy import ndarray
 from sklearn.neighbors import KNeighborsRegressor
 
+PATH_PROJECT = "/home/yoshraf/projects/master-analysis-inequality-mobility/"
+
+
 # Necessário carregar um shp de cotas
 df_relevo = gpd.read_file(
-    "/home/yoshraf/projects/mestrado/data/gis/ponto_cotado/sad6996_PONTO_COTADO_INTERVIA.shp")
+    f"{PATH_PROJECT}data/gis/ponto_cotado/sad6996_PONTO_COTADO_INTERVIA.shp")
 # Tranforma geometry em duas colunas
 df_relevo["x"] = df_relevo["geometry"].apply(lambda pos: pos.x)
 df_relevo["y"] = df_relevo["geometry"].apply(lambda pos: pos.y)

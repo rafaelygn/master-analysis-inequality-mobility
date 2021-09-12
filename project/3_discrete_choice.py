@@ -4,7 +4,7 @@ import yaml
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 
-PATH_PROJECT = "/home/yoshraf/projects/mestrado/"
+PATH_PROJECT = "/home/yoshraf/projects/master-analysis-inequality-mobility/"
 # Global Variables
 PATH_R_DATARAW = "data/raw/"
 PATH_R_DATAPRC = "data/processed/"
