@@ -1,0 +1,261 @@
+geral:
+  abs_path: /home/yoshraf/projects/master-analysis-inequality-mobility/inequality-mobility/
+geodata:
+  metro: data/01_raw/gis/SAD69-96_SHP_estacaometro.zip!SAD69-96_SHP_estacaometro/SAD69-96_SHP_estacaometro_point.shp
+  trem: data/01_raw/gis/SAD69-96_SHP_estacaotrem.zip!SAD69-96_SHP_estacaotrem/SAD69-96_SHP_estacaotrem_point.shp
+  ciclovia: data/01_raw/gis/SAD69-96_SHP_redecicloviaria.zip!SAD69-96_SHP_redecicloviaria/SAD69-96_SHP_redecicloviaria.shp
+  ilumina: data/01_raw/gis/SAD69-96_SHP_iluminacaopublica.zip!SAD69-96_SHP_iluminacaopublica/SAD69-96_SHP_iluminacaopublica.shp
+  ponto_onibus: data/01_raw/gis/SAD69-96_SHP_pontoonibus.zip!SAD69-96_SHP_pontoonibus/SAD69-96_SHP_pontoonibus.shp
+  ponto_cotado: data/01_raw/gis/PONTO_COTADO.zip!sad6996_PONTO_COTADO_INTERVIA.shp
+  terminal: data/01_raw/gis/terminal_onibus.zip!sad6996_terminal_onibus.shp
+  od2017: data/01_raw/OD_2017.sav
+  od2007: data/01_raw/OD_2007_v2d.sav
+  # external
+  acess_empregos_ti: data/01_raw/external/Acessibilidade.zip!Acessibilidade/Acessibilidade_Empregos/Zonas_OD2017_Acc_60Min_Empregos_TI_Qua_7AM.shp
+  acess_empregos_tp: data/01_raw/external/Acessibilidade.zip!Acessibilidade/Acessibilidade_Empregos/Zonas_OD2017_Acc_60Min_Empregos_TP_Qua_7AM.shp
+  acess_lazer_ti: data/01_raw/external/Acessibilidade.zip!Acessibilidade/Acessibilidade_Lazer/Zonas_OD2017_Acc_30Min_Lazer_TI_Dom_10AM.shp
+  acess_lazer_tp: data/01_raw/external/Acessibilidade.zip!Acessibilidade/Acessibilidade_Lazer/Zonas_OD2017_Acc_30Min_Lazer_TP_Dom_10AM.shp
+  censo_demo: data/01_raw/external/Acessibilidade.zip!Acessibilidade/Classes_Socio-ocupacionais_raca/SC_2010_Raca_Renda.shp
+features:
+  censo_demo:
+    features:
+      - alta_branc
+      - alta_negro
+      - alta_outro
+      - media_bran
+      - media_negr
+      - media_outr
+      - baixa_bran
+      - baixa_negr
+      - baixa_outr
+  od2007:
+    features:
+      - Zona de Domicílio
+      - Município do Domicílio
+      - Coordenada X Domicílio
+      - Coordenada Y Domicílio
+      - Coordenada X Origem
+      - Coordenada Y Origem
+      - Coordenada X Destino
+      - Coordenada Y Destino
+      - Identifica Domicílo
+      - Número do Domicílio
+      - Data da Entrevista
+      - Número de Moradores no Domicílio
+      - Quantidade Automóvel
+      - Renda Familiar Mensal
+      - Identifica Pessoa
+      - Situação Familiar
+      - Idade
+      - Gênero
+      - Valor da Renda Individual
+      - Número da Viagem
+      - Total de Viagens internas
+      - Motivo na Origem
+      - Motivo no Destino
+      - Modo Principal
+  od2017:
+    features:
+      # Domicílio
+      - Município do domicílio
+      - Zona de domicílio
+      - Coordenada X domicílio
+      - Coordenada Y domicílio
+      - Identifica domicílo
+      - Data da entrevista
+      - Tipo de domicílio
+      - Possui água encanada?
+      - A rua é pavimentada?
+      - Total de famílias no domicílio
+      - Total de moradores na família
+      - Condição de moradia # Própria
+      - Quantidade de banheiros
+      - Quantidade de empregados domésticos
+      - Quantidade de automóveis
+      - Quantidade de motocicletas
+      - Quantidade de bicicletas
+      - Critério de Classificação Econônica Brasil
+      - Pontos Critério Brasil
+      - Renda familiar mensal
+      # Pessoa
+      - Identifica pessoa # ID Pessoa
+      - Situação familiar # Responsável/Conjugue
+      - Idade
+      - Gênero
+      - Estuda atualmente?
+      - Grau de instrução
+      - Condição de atividade
+      - Valor da renda individual
+      # Viagem
+      - Número da viagem
+      - Dia da Semana
+      - Total de viagens da pessoa
+      - Coordenada X Origem
+      - Coordenada Y Origem
+      - Coordenada X Destino
+      - Coordenada Y Destino
+      - Motivo na Origem
+      - Motivo no Destino
+      - Servir passageiro na Origem
+      - Servir passageiro no Destino
+      - Modo 1
+      - Modo 2
+      - Modo 3
+      - Modo 4
+      - Hora Saída
+      - Minuto Saída
+      - Tempo Andando na Origem
+      - Hora Chegada
+      - Minuto Chegada
+      - Tempo Andando no Destino
+      - Duração da Viagem (em minutos)
+      - Modo Principal
+      - Número de ordem do registro #ID
+  od2017_socio:
+    bens:
+      - Quantidade de automóveis
+      - Quantidade de motocicletas
+      - Quantidade de bicicletas
+      - Renda familiar mensal
+    per: Total de moradores na família
+  diff-in-diffs:
+    od2007:
+      zone:
+        cluster_perif:
+          - 46 # Água Rasa
+          - 240 # Linhas Corrente
+          - 241 # Vila Ema
+          - 200 # Vila Formosa
+          # News
+          - 238 # Orfanato
+          - 239 # Vila Zelina
+          - 237 # Tamanduatei
+          - 228 # Vila Carioca
+          # - 230 # Vila Heliópolis + (São João Climatico)
+          # - 223 # Sacomã
+        cluster_center:
+          - 81 # Pinheiros
+          - 79 # Jardim Paulistano
+          - 80 # Jardim Europa
+          - 95 # Alto de Pinheiros
+          - 75 # Jardins
+          - 82 # Vila Madalena
+          - 67 # Chácara Itaim
+    od2017:
+      zone:
+        cluster_perif:
+          - 46 # Água Rasa
+          - 256 # Linhas Corrente
+          - 257 # Vila Ema
+          - 211 # Vila Formosa
+          # News
+          - 254 # Orfanato
+          - 255 # Vila Zelina
+          - 253 # Tamanduatei
+          - 242 # Vila Carioca
+          # - 244 # Vila Heliópolis
+          # - 245 # Vila Heliópolis (São João Climatico)
+          # - 237 # Sacomã
+        cluster_center:
+          - 82 # Pinheiros
+          - 80 # Jardim Paulistano
+          - 81 # Jardim Europa
+          - 96 # Alto de Pinheiros
+          - 76 # Jardins
+          - 83 # Vila Madalena
+          - 68 # Chácara Itaim
+    subway:
+      - ORATÓRIO
+      - FRADIQUE COUTINHO
+      - FARIA LIMA
+      - PINHEIROS
+      - VILA PRUDENTE
+      - TAMANDUATEÍ
+      # - SACOMÃ
+    distance:
+      treatment: 600
+      treatment-max: 2000
+    
+
+model_input:
+  discrete_choice:
+    columns:
+      # Domicílio
+      - Zona de domicílio
+      - Data da entrevista
+      - Coordenada X domicílio
+      - Coordenada Y domicílio
+      # Pessoa
+      - Identifica pessoa # ID Pessoa
+      # - Situação familiar # Responsável/Conjugue
+      - Idade
+      - Gênero
+      # Viagem
+      # - Dia da Semana
+      - Total de viagens da pessoa
+      - Motivo no Destino
+      - Hora Saída
+      # Novas Variáveis Gis
+      - loc_origem_count_parada
+      # - loc_origem_count_ilum_std
+      # - loc_origem_count_ilum_led
+      - loc_origem_dist_metro
+      - loc_origem_dist_trem
+      - loc_origem_dist_term
+      - loc_origem_dist_ciclo
+      # - loc_origem_A_L_TP_
+      # - loc_origem_A_L_TI_
+      # - loc_origem_A_E_60M_TP_
+      # - loc_origem_A_E_60M_TI_
+      # - loc_destino_count_parada
+      # - loc_destino_count_ilum_std
+      # - loc_destino_count_ilum_led
+      - loc_destino_dist_metro
+      # - loc_destino_dist_trem
+      # - loc_destino_dist_term
+      # - loc_destino_dist_ciclo
+      # - loc_destino_A_L_TP_
+      # - loc_destino_A_L_TI_
+      # - loc_destino_A_E_60M_TP_
+      # - loc_destino_A_E_60M_TI_
+      # Bens per capita
+      - per Quantidade de automóveis
+      - per Quantidade de motocicletas
+      - per Quantidade de bicicletas
+      - per Renda familiar mensal
+      # Final
+      - dist_od
+      # - diff_cota_od
+      - declividade
+      # - Entre 21-23
+      # - Entre 23-04
+    idx:
+      - Identifica pessoa
+      - Zona de domicílio
+      - Data da entrevista
+      - Coordenada X domicílio
+      - Coordenada Y domicílio
+    label:
+      column: Modo Principal
+      values:
+        - A pé
+        - Dirigindo automóvel
+        - Ônibus/micro-ônibus/perua do município de São Paulo
+        - Metrô
+        - Passageiro de automóvel
+        - Transporte escolar
+        - Táxi não convencional
+        - Dirigindo moto
+        - Trem
+        - Bicicleta
+        - Táxi convencional
+    encoding:
+      # Motivo no Destino:
+      #   - Pessoa responsável
+      #   - Filho(a)/ enteado(a)
+      #   - Conjugê/ companheiro(a)
+    categorical:
+      - Gênero
+      - Motivo no Destino
+
+

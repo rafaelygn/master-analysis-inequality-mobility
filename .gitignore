@@ -1,10 +1,13 @@
 venv/
-data/counting_trips/**
-data/discrete_choice/**
-data/how_far/**
-data/processed/**
+# Folds
+data/
+data/gis/acessibilidade/Acessibilidade_Empregos/**
 .vscode/
+project/
+notebooks/
+# Files
 **/.ipynb_checkpoints/**
 **/.ipynb_checkpoints
 **/__pycache__/**
 *.log
+*.pyc

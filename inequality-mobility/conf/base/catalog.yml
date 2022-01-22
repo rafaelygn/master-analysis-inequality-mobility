@@ -1,0 +1,128 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://kedro.readthedocs.io/en/stable/05_data/01_data_catalog.html
+
+# https://kedro.readthedocs.io/en/stable/12_faq/01_faq.html#what-is-data-engineering-convention
+
+# Raw
+inauguracao:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/inauguracoes.csv
+
+# Raw - Shapefiles Zipped
+od2017:
+  type: pandas.ParquetDataSet
+  filepath: data/02_intermediate/od2017.parquet
+
+metro:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/metro.geojson
+
+trem:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/trem.geojson
+
+ciclovia:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/ciclovia.geojson
+
+ilumina:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/ilumina.geojson
+
+ponto_onibus:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/ponto_onibus.geojson
+
+ponto_cotado:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/ponto_cotado.geojson
+
+terminal:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/terminal.geojson
+
+acc_emp_ti:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/acc_emp_ti.geojson
+
+acc_emp_tp:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/acc_emp_tp.geojson
+
+acc_laz_ti:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/acc_laz_ti.geojson
+
+acc_laz_tp:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/acc_laz_tp.geojson
+
+censo_demo:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/censo_demo.geojson
+
+# Intermediate
+od2017_filtered:
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/od2017_filtered.parquet
+
+od2007_filtered:
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/od2017_filtered.parquet
+
+censo_demo_final:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/03_primary/censo_demo_final.geojson
+
+acc_joined:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/02_intermediate/acc_joined.geojson
+
+# Feature
+dataset_ilumina:
+  type: pandas.ParquetDataSet
+  filepath: data/04_feature/dataset_ilumina.parquet
+
+dataset_eng:
+  type: pandas.ParquetDataSet
+  filepath: data/04_feature/dataset_eng.parquet
+
+dataset_cota:
+  type: pandas.ParquetDataSet
+  filepath: data/04_feature/dataset_cota.parquet
+
+dataset_socio:
+  type: pandas.ParquetDataSet
+  filepath: data/04_feature/dataset_socio.parquet
+
+dataset_final:
+  type: pandas.ParquetDataSet
+  filepath: data/04_feature/dataset_final.parquet
+
+# Diff-in-Diffs
+dataset_07_diff:
+  type: pandas.ParquetDataSet
+  filepath: data/04_feature/dataset_07_diff.parquet
+
+dataset_17_diff:
+  type: pandas.ParquetDataSet
+  filepath: data/04_feature/dataset_17_diff.parquet
+
+# Model Input
+X_train_dc:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/X_train_dc.parquet
+
+X_test_dc:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/X_test_dc.parquet
+
+y_train_dc:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/y_train_dc.parquet
+
+y_test_dc:
+  type: pandas.ParquetDataSet
+  filepath: data/05_model_input/y_test_dc.parquet
