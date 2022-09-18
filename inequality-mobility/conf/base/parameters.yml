@@ -125,7 +125,7 @@ features:
           - 46 # Água Rasa
           - 240 # Linhas Corrente
           - 241 # Vila Ema
-          - 200 # Vila Formosa
+          # - 200 # Vila Formosa
           # News
           - 238 # Orfanato
           - 239 # Vila Zelina
@@ -133,21 +133,29 @@ features:
           - 228 # Vila Carioca
           # - 230 # Vila Heliópolis + (São João Climatico)
           # - 223 # Sacomã
+          - 222 # Ipiranga
+          - 227 # Vila Independencia
         cluster_center:
           - 81 # Pinheiros
           - 79 # Jardim Paulistano
           - 80 # Jardim Europa
           - 95 # Alto de Pinheiros
-          - 75 # Jardins
-          - 82 # Vila Madalena
+          # - 75 # Jardins
+          # - 82 # Vila Madalena
           - 67 # Chácara Itaim
+          - 295 # Morumbi
+          - 296 # Jóquei Clube
+          - 317 # Cidade Universitária
+          - 318 # Butanta
+          - 319 # Jardim Caxingui
+
     od2017:
       zone:
         cluster_perif:
           - 46 # Água Rasa
           - 256 # Linhas Corrente
           - 257 # Vila Ema
-          - 211 # Vila Formosa
+          # - 211 # Vila Formosa
           # News
           - 254 # Orfanato
           - 255 # Vila Zelina
@@ -156,22 +164,30 @@ features:
           # - 244 # Vila Heliópolis
           # - 245 # Vila Heliópolis (São João Climatico)
           # - 237 # Sacomã
+          - 236 # Ipiranga
+          - 241 # Vila Independencia
         cluster_center:
           - 82 # Pinheiros
           - 80 # Jardim Paulistano
           - 81 # Jardim Europa
           - 96 # Alto de Pinheiros
-          - 76 # Jardins
-          - 83 # Vila Madalena
+          # - 76 # Jardins
+          # - 83 # Vila Madalena
           - 68 # Chácara Itaim
+          - 317 # Jóquei Clube
+          - 316 # Morumbi
+          - 339 # Cidade Universitária
+          - 340 # Butantã
+          - 341 # Jardim Caxingui
     subway:
       - ORATÓRIO
       - FRADIQUE COUTINHO
       - FARIA LIMA
       - PINHEIROS
+      - BUTANTÃ
       - VILA PRUDENTE
       - TAMANDUATEÍ
-      # - SACOMÃ
+      - SACOMÃ
     distance:
       treatment: 600
       treatment-max: 2000

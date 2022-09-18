@@ -70,7 +70,7 @@ od2017_filtered:
 
 od2007_filtered:
   type: pandas.ParquetDataSet
-  filepath: data/03_primary/od2017_filtered.parquet
+  filepath: data/03_primary/od2007_filtered.parquet
 
 censo_demo_final:
   type: geopandas.GeoJSONDataSet

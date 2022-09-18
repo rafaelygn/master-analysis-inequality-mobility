@@ -7,7 +7,7 @@ from shapely.ops import unary_union
 from datetime import datetime
 
 
-from .utils import DICT_GIS_17, create_gis_point, get_counting, geo_prep_to_join
+from .utils import DICT_GIS_17, GEO_DES, create_gis_point, get_counting, geo_prep_to_join
 from .cota_knn import predict_knn
 
 
@@ -240,7 +240,9 @@ def node_diff_07(
 ) -> pd.DataFrame:
 
     GEO_DOM = ["Coordenada X Domicílio", "Coordenada Y Domicílio"]
-    DICT_GIS = {"loc_domicilio": GEO_DOM}
+    GEO_ORI = ["Coordenada X Origem", "Coordenada Y Origem"]
+    GEO_DES = ["Coordenada X Destino", "Coordenada Y Destino"]
+    DICT_GIS = {"loc_domicilio": GEO_DOM, "loc_origem": GEO_ORI, "loc_destino": GEO_DES}
     k = "loc_domicilio"
 
     # Clusters
@@ -263,6 +265,8 @@ def node_diff_07(
     gdf_gis_final = pd.concat([od07_perif, od07_center])
     print("Create main location gis points")
     gdf_gis_final = create_gis_point(gdf_gis_final, DICT_GIS)
+    gdf_gis_final["dist_od"] = gdf_gis_final.apply(
+        lambda x: x["loc_origem"].distance(x["loc_destino"]), axis=1)
     # Filtrar Metros Desejados
     gdf_metro = gdf_metro[gdf_metro["emt_nome"].isin(subways)]
     geo_metro = unary_union(gdf_metro["geometry"])
@@ -272,6 +276,8 @@ def node_diff_07(
     # Filtrar metros até certa distância
     gdf_gis_final = gdf_gis_final[gdf_gis_final[f"{k}_dist_metro"] < dist_max]
     gdf_gis_final["T"] = gdf_gis_final[f"{k}_dist_metro"].apply(lambda x: 1 if x <= dist_min else 0)
+    # Filtrar para ao menos uma viagem
+    gdf_gis_final = gdf_gis_final[gdf_gis_final["Total de Viagens internas"] > 0]
     # Calcular diff-socio
     gdf_gis_final = feature_bens_per_capita(gdf_gis_final, bens, per)
     # Drop Geometry Columns
@@ -286,8 +292,10 @@ def node_diff_17(
 ) -> pd.DataFrame:
 
     GEO_DOM = ["Coordenada X domicílio", "Coordenada Y domicílio"]
+    GEO_ORI = ["Coordenada X Origem", "Coordenada Y Origem"]
+    GEO_DES = ["Coordenada X Destino", "Coordenada Y Destino"]
+    DICT_GIS = {"loc_domicilio": GEO_DOM, "loc_origem": GEO_ORI, "loc_destino": GEO_DES}
     k = "loc_domicilio"
-    DICT_GIS = {k: GEO_DOM}
 
 
     # Clusters
@@ -310,6 +318,8 @@ def node_diff_17(
     gdf_gis_final = pd.concat([od17_perif, od17_center])
     print("Create main location gis points")
     gdf_gis_final = create_gis_point(gdf_gis_final, DICT_GIS)
+    gdf_gis_final["dist_od"] = gdf_gis_final.apply(
+        lambda x: x["loc_origem"].distance(x["loc_destino"]), axis=1)
     # Filtrar Metros Desejados
     gdf_metro = gdf_metro[gdf_metro["emt_nome"].isin(subways)]
     geo_metro = unary_union(gdf_metro["geometry"])
@@ -318,6 +328,8 @@ def node_diff_17(
     gdf_gis_final[f"{k}_dist_metro"] = gdf_gis_final[k].apply(lambda x: geo_metro.distance(x))
     # Filtrar metros até certa distância
     gdf_gis_final = gdf_gis_final[gdf_gis_final[f"{k}_dist_metro"] < dist_max]
+    # Filtrar para ao menos uma viagem
+    gdf_gis_final = gdf_gis_final[gdf_gis_final["Total de viagens da pessoa"] > 0]
     # Calcular diff-socio
     gdf_gis_final = feature_bens_per_capita(gdf_gis_final, bens, per)
     # Drop Geometry Columns
