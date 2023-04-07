@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 # All Numeric types
 numerics_dtypes = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 
+
 def data_info(dataset: pd.DataFrame) -> pd.DataFrame:
     info = pd.DataFrame()
     info["var"] = dataset.columns
@@ -33,6 +34,36 @@ def encoder_other(dataset: pd.DataFrame, enc_others: Dict) -> pd.DataFrame:
         dataset[k] = dataset[k].apply(lambda x: x if x in v else "_outros_")
     return dataset
 
+
+def prep_create_label(df: pd.DataFrame, l_mode: list):
+    df_na = df[l_mode].fillna('NA')
+    df_na = df_na.replace(
+        "Ônibus/micro-ônibus/perua do município de São Paulo", "Ônibus")
+    df_na = df_na.replace("Ônibus/micro-ônibus/perua metropolitano", "Ônibus")
+    df_na = df_na.replace("Ônibus/micro-ônibus/perua de outros municípios", "Ônibus")
+    df_na = df_na.replace("Metrô", "Metrô/Trem")
+    df_na = df_na.replace("Trem", "Metrô/Trem")
+    df_na = df_na.replace("Dirigindo automóvel", "Automóvel")
+    df_na = df_na.replace("Passageiro de automóvel", "Automóvel")
+    df_na = df_na.replace("Táxi convencional", "Taxi/Taxi App")
+    df_na = df_na.replace("Táxi não convencional", "Taxi/Taxi App")
+    return df_na
+
+
+def create_label(df: pd.DataFrame, label_values: list):
+    l_mode = ["Modo 1", "Modo 2", "Modo 3", "Modo 4"]
+    df_na = prep_create_label(df, l_mode)
+    return (
+        df_na[l_mode[0]] + '+'
+        + df_na[l_mode[1]] + '+'
+        + df_na[l_mode[2]] + '+'
+        + df_na[l_mode[3]]
+    ).str.replace(r'\+NA', '', regex=True).str.split('+').apply(
+        lambda x: list(set(sorted(x)))
+    ).str.join("+").apply(
+        lambda x: x if x in label_values else "Outros"
+    ).values
+
 def node_create_dis_cho(df: pd.DataFrame, params: Dict) -> Tuple:
     # Main variables from params
     cols = params["columns"]
@@ -41,8 +72,10 @@ def node_create_dis_cho(df: pd.DataFrame, params: Dict) -> Tuple:
     cat = params["categorical"]
     label = params["label"]["column"]
     label_values = params["label"]["values"]
+    # Create feature
+    df[label] = create_label(df, label_values)
     # Filter, select and Drop Values
-    df_filter = df[df[label].isin(label_values)][cols + [label]].drop_duplicates()
+    df_filter = df[cols + [label]].drop_duplicates()
     print(f"Número de linhas:{df_filter.shape[0]}")
     print(f"Profile df:\n{data_info(df_filter)}")
     # Set Index
@@ -58,4 +91,3 @@ def node_create_dis_cho(df: pd.DataFrame, params: Dict) -> Tuple:
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.30, random_state=42)
     return X_train, X_test, y_train, y_test
-

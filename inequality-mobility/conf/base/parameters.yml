@@ -242,9 +242,9 @@ model_input:
       # Final
       - dist_od
       # - diff_cota_od
-      - declividade
-      # - Entre 21-23
-      # - Entre 23-04
+      # - declividade
+      - Entre 21-23
+      - Entre 23-04
     idx:
       - Identifica pessoa
       - Zona de domicílio
@@ -252,19 +252,19 @@ model_input:
       - Coordenada X domicílio
       - Coordenada Y domicílio
     label:
-      column: Modo Principal
+      column: Modo Combinado
       values:
         - A pé
-        - Dirigindo automóvel
-        - Ônibus/micro-ônibus/perua do município de São Paulo
-        - Metrô
-        - Passageiro de automóvel
+        - Automóvel
+        - Ônibus
+        - Metrô/Trem
+        - Ônibus+Metrô/Trem
         - Transporte escolar
-        - Táxi não convencional
+        - Taxi/Taxi App
         - Dirigindo moto
-        - Trem
         - Bicicleta
-        - Táxi convencional
+        - Metrô/Trem+Automóvel
+        - Outros
     encoding:
       # Motivo no Destino:
       #   - Pessoa responsável
@@ -274,4 +274,15 @@ model_input:
       - Gênero
       - Motivo no Destino
 
-
+modeling:
+  map_class:
+    A pé: 0
+    Automóvel: 1
+    Ônibus: 2
+    Ônibus+Metrô/Trem: 3
+    Metrô/Trem: 4
+    Transporte escolar: 5
+    Taxi/Taxi App: 6
+    Dirigindo moto: 7
+    Bicicleta: 8
+    Outros: 9

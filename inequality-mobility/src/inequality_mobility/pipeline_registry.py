@@ -30,7 +30,7 @@
 from typing import Dict
 
 from kedro.pipeline import Pipeline
-from inequality_mobility.pipelines import geodata, features, model_in
+from inequality_mobility.pipelines import geodata, features, model_in, modeling, xai
 
 
 def register_pipelines() -> Dict[str, Pipeline]:
@@ -42,9 +42,15 @@ def register_pipelines() -> Dict[str, Pipeline]:
     geodata_pipeline = geodata.create_pipeline()
     feature_pipeline = features.create_pipeline()
     model_in_pipeline = model_in.create_pipeline()
+    modeling_pipeline = modeling.create_pipeline()
+    xai_pipeline = xai.create_pipeline()
+
+
     return {
-        "__default__": geodata_pipeline + feature_pipeline + model_in_pipeline,
+        "__default__": geodata_pipeline + feature_pipeline + model_in_pipeline + modeling_pipeline + xai_pipeline,
         "geodata": geodata_pipeline,
         "feature": feature_pipeline,
-        "model_in": model_in_pipeline
+        "model_in": model_in_pipeline,
+        "modeling": modeling_pipeline,
+        "xai": xai_pipeline,
         }

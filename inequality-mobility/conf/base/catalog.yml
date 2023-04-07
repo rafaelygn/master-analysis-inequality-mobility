@@ -126,3 +126,39 @@ y_train_dc:
 y_test_dc:
   type: pandas.ParquetDataSet
   filepath: data/05_model_input/y_test_dc.parquet
+
+clf_rf:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/clf_rf.pickle
+
+clf_logit:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/clf_logit.pickle
+
+clf_lgbm:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/clf_lgbm.pickle
+
+clf_tree:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/clf_tree.pickle
+
+clf_svm:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/clf_svm.pickle
+
+clf_xgb:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/clf_xgb.pickle
+
+clf_ann:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/clf_ann.pickle
+
+shap_v_rf:
+  type: pickle.PickleDataSet
+  filepath: data/07_model_output/shap_v_rf.pickle
+
+shap_v_logit:
+  type: pickle.PickleDataSet
+  filepath: data/07_model_output/shap_v_logit.pickle
