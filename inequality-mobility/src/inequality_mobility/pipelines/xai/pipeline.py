@@ -9,7 +9,7 @@ def create_pipeline(**kwargs):
             node(
                 func=node_create_shap,
                 inputs=["X_train_dc", "clf_rf", "clf_logit"],
-                outputs=["shap_v_rf", "shap_v_logit"],
+                outputs=["shap_v_rf", "shap_v_logit", 'df_sample'],
                 name="create_shap",
                 tags="create_shap",
             ),

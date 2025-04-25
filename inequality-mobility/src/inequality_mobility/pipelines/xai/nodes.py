@@ -7,11 +7,15 @@ from .xai_shap import (create_agno_shap, create_tree_shap, get_main_features,
                        return_df_barplot)
 
 
-def node_create_shap(X, clf_rf, clf_logit, samples=100):
+def node_create_shap(X, clf_rf, clf_logit, samples=500):
+    clf_rf, _, _ = clf_rf
+    # clf_logit, _, _ = clf_logit
     df_sample = X.sample(samples, random_state=42)
+    print('Tree')
     shap_v_rf = create_tree_shap(df_sample, clf_rf)
+    print('Logit')
     shap_v_lg = create_agno_shap(df_sample, clf_logit)
-    return shap_v_rf, shap_v_lg
+    return shap_v_rf, shap_v_lg, df_sample
 
 
 def shap_analysis(shap_v, map_class, save_plot):
@@ -44,6 +48,7 @@ def node_feature_importance(shap_v_rf, shap_v_lg, map_class):
 
 
 def node_pdp(clf_rf, clf_logit, shap_v, map_class):
+    clf_rf = clf_rf[0]
     clf_rf_odds = LogOddsEstimator(clf_rf)
     clf_logit_odds = LogOddsEstimator(clf_logit)
     X = pd.DataFrame(shap_v.data, columns=shap_v.feature_names) 

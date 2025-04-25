@@ -23,7 +23,7 @@ def encoder_onehot(dataset: pd.DataFrame, cat: List, idx: List) -> pd.DataFrame:
     # OneHotCoding
     enc = OneHotEncoder(handle_unknown="error", drop="if_binary")
     X_cat = pd.DataFrame(enc.fit_transform(
-        dataset[cat]).toarray(), columns=enc.get_feature_names(cat))
+        dataset[cat]).toarray(), columns=enc.get_feature_names_out(cat))
     X = pd.concat([dataset.select_dtypes(
         include=numerics_dtypes).reset_index(), X_cat], axis=1).set_index(idx)
     return X
@@ -61,7 +61,7 @@ def create_label(df: pd.DataFrame, label_values: list):
     ).str.replace(r'\+NA', '', regex=True).str.split('+').apply(
         lambda x: list(set(sorted(x)))
     ).str.join("+").apply(
-        lambda x: x if x in label_values else "Outros"
+        lambda x: x.strip() if x.strip() in label_values else "Outros"
     ).values
 
 def node_create_dis_cho(df: pd.DataFrame, params: Dict) -> Tuple:
@@ -74,6 +74,7 @@ def node_create_dis_cho(df: pd.DataFrame, params: Dict) -> Tuple:
     label_values = params["label"]["values"]
     # Create feature
     df[label] = create_label(df, label_values)
+    print(df[label].value_counts(normalize=True))
     # Filter, select and Drop Values
     df_filter = df[cols + [label]].drop_duplicates()
     print(f"Número de linhas:{df_filter.shape[0]}")
@@ -87,6 +88,7 @@ def node_create_dis_cho(df: pd.DataFrame, params: Dict) -> Tuple:
     X = encoder_onehot(dataset, cat, idx)
     # Split into X and y
     y = dataset[[label]]
+    print(y[label].value_counts())
     # Split into Train and Test
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.30, random_state=42)

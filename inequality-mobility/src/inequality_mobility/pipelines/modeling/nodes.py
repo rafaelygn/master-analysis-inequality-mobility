@@ -21,7 +21,7 @@ from .utis import get_validation, kfold_result
 
 SAVE_RESULTS = '/home/yoshraf/projects/master-analysis-inequality-mobility/inequality-mobility/'
 NCALLS = 50
-NFOLDS = 3
+NFOLDS = 4
 SAMPLER = TPESampler(seed=42)
 
 
@@ -144,10 +144,11 @@ def node_tree(X_train, X_test, y_train, y_test, map_class, save_report='tree'):
 
 def objective_rf(trial, X, y):
     model_args = {
-        "n_estimators": trial.suggest_int("n_estimators", 1, 100),
-        "max_depth": trial.suggest_int('max_depth', 1, 30),
+        "n_estimators": trial.suggest_int("n_estimators", 10, 100),
+        "max_depth": trial.suggest_int('max_depth', 5, 50),
         "criterion": trial.suggest_categorical('criterion', ['gini', 'entropy', 'log_loss']),
-        "min_samples_split": trial.suggest_int("min_samples_split", 5, 50),
+        "min_samples_split": trial.suggest_int("min_samples_split", 2, 11),
+        "min_samples_leaf": trial.suggest_int("min_samples_leaf", 1, 11),
         "max_features": trial.suggest_categorical("max_features", ["sqrt", "log2", None]),
         "n_jobs":1,
         "random_state": 42

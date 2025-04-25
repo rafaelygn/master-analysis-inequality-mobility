@@ -8,7 +8,7 @@ PATH_FIG = "/home/yoshraf/projects/master-analysis-inequality-mobility/inequalit
 
 
 def create_tree_shap(X, tree):
-    explainer_tree = shap.TreeExplainer(tree)
+    explainer_tree = shap.Explainer(tree)
     return explainer_tree(X)
 
 
