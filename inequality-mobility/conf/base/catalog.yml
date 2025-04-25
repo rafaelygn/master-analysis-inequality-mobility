@@ -162,3 +162,7 @@ shap_v_rf:
 shap_v_logit:
   type: pickle.PickleDataSet
   filepath: data/07_model_output/shap_v_logit.pickle
+
+df_sample:
+  type: pandas.ParquetDataSet
+  filepath: data/07_model_output/df_sample.parquet

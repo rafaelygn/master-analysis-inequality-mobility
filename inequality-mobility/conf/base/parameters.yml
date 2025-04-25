@@ -243,8 +243,8 @@ model_input:
       - dist_od
       # - diff_cota_od
       # - declividade
-      - Entre 21-23
-      - Entre 23-04
+      # - Entre 21-23
+      # - Entre 23-04
     idx:
       - Identifica pessoa
       - Zona de domicílio
@@ -259,11 +259,12 @@ model_input:
         - Ônibus
         - Metrô/Trem
         - Ônibus+Metrô/Trem
+        - Metrô/Trem+Ônibus
         - Transporte escolar
         - Taxi/Taxi App
         - Dirigindo moto
         - Bicicleta
-        - Metrô/Trem+Automóvel
+        # - Metrô/Trem+Automóvel
         - Outros
     encoding:
       # Motivo no Destino:
@@ -278,11 +279,11 @@ modeling:
   map_class:
     A pé: 0
     Automóvel: 1
-    Ônibus: 2
-    Ônibus+Metrô/Trem: 3
+    Bicicleta: 2
+    Dirigindo moto: 3
     Metrô/Trem: 4
-    Transporte escolar: 5
-    Taxi/Taxi App: 6
-    Dirigindo moto: 7
-    Bicicleta: 8
-    Outros: 9
+    Metrô/Trem+Ônibus: 5
+    Outros: 6
+    Taxi/Taxi App: 7
+    Transporte escolar: 8
+    Ônibus: 9
