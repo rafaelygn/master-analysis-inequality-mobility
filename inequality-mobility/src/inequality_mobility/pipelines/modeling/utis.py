@@ -28,7 +28,7 @@ def get_validation(X, y):
 
 
 def get_groups(X_train):
-    return X_train.reset_index()['Identifica pessoa']
+    return X_train.reset_index()['identifica_pessoa']
 
 
 def kfold_result(X, y, n_splits, Model, model_args, fit_args = {}, nn=False):

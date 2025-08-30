@@ -67,8 +67,8 @@ def node_modeling(X_train, X_test, y_train, y_test, map_class):
 
 def node_logit(X_train, X_test, y_train, y_test, map_class, scaler=False):
     # Mapping y_class to a numerical
-    y_train = y_train["Modo Combinado"].map(map_class)
-    y_test = y_test["Modo Combinado"].map(map_class)
+    y_train = y_train["modo_principal_da_viagem"].map(map_class)
+    y_test = y_test["modo_principal_da_viagem"].map(map_class)
     if scaler:
         scaler = RobustScaler()
         X_train = scaler.fit_transform(X_train)

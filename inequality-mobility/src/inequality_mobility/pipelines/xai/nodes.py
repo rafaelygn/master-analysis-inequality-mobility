@@ -39,11 +39,11 @@ def node_feature_importance(shap_v_rf, shap_v_lg, map_class):
     # ---------
     # RF
     # ---------
-    shap_analysis(shap_v_rf, map_class, 'RF')
+    shap_analysis(shap_v_rf, map_class, 'RF_OD23')
     # ---------
     # Logit
     # ---------
-    shap_analysis(shap_v_lg, map_class, 'logit')
+    shap_analysis(shap_v_lg, map_class, 'logit_OD23')
     return None
 
 

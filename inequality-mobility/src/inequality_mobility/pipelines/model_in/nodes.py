@@ -37,21 +37,26 @@ def encoder_other(dataset: pd.DataFrame, enc_others: Dict) -> pd.DataFrame:
 
 def prep_create_label(df: pd.DataFrame, l_mode: list):
     df_na = df[l_mode].fillna('NA')
-    df_na = df_na.replace(
-        "Ônibus/micro-ônibus/perua do município de São Paulo", "Ônibus")
-    df_na = df_na.replace("Ônibus/micro-ônibus/perua metropolitano", "Ônibus")
+    df_na = df_na.replace("Ônibus/micro-ônibus/perua do município de São Paulo", "Ônibus")
+    df_na = df_na.replace("Ônibus/micro-ônibus/van metropolitano", "Ônibus")
+    df_na = df_na.replace("Ônibus/micro-ônibus/van do município de São Paulo", "Ônibus")
+    df_na = df_na.replace("Ônibus/micro-ônibus/van de outros municípios", "Ônibus")
     df_na = df_na.replace("Ônibus/micro-ônibus/perua de outros municípios", "Ônibus")
+    df_na = df_na.replace("Ônibus/micro-ônibus/van do município de São Paulo", "Ônibus")
     df_na = df_na.replace("Metrô", "Metrô/Trem")
     df_na = df_na.replace("Trem", "Metrô/Trem")
     df_na = df_na.replace("Dirigindo automóvel", "Automóvel")
     df_na = df_na.replace("Passageiro de automóvel", "Automóvel")
     df_na = df_na.replace("Táxi convencional", "Taxi/Taxi App")
     df_na = df_na.replace("Táxi não convencional", "Taxi/Taxi App")
+    df_na = df_na.replace("Táxi não convencional / aplicativo", "Taxi/Taxi App")
+    df_na = df_na.replace("Dirigindo moto", "Motocicleta")
+    df_na = df_na.replace("Passageiro de moto", "Motocicleta")
     return df_na
 
 
 def create_label(df: pd.DataFrame, label_values: list):
-    l_mode = ["Modo 1", "Modo 2", "Modo 3", "Modo 4"]
+    l_mode = ["modo_1", "modo_2", "modo_3", "modo_4"]
     df_na = prep_create_label(df, l_mode)
     return (
         df_na[l_mode[0]] + '+'
@@ -85,6 +90,7 @@ def node_create_dis_cho(df: pd.DataFrame, params: Dict) -> Tuple:
     dataset = dataset.dropna(how="any")
     # Filling missing valuies with mean
     # dataset.fillna(dataset.mean(), inplace=True)
+    dataset = dataset[dataset.sexo != 'Não respondeu']
     X = encoder_onehot(dataset, cat, idx)
     # Split into X and y
     y = dataset[[label]]

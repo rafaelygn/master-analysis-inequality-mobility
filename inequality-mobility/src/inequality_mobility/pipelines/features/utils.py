@@ -19,6 +19,10 @@ GEO_DOM_17 = ["Coordenada X domicílio", "Coordenada Y domicílio"]
 GEO_ORI_17 = ["Coordenada X Origem", "Coordenada Y Origem"]
 GEO_DES_17 = ["Coordenada X Destino", "Coordenada Y Destino"]
 
+GEO_DOM_23 = ["coordenada_x_do_domicilio", "coordenada_y_do_domicilio"]
+GEO_ORI_23 = ["coordenada_x_origem", "coordenada_y_origem"]
+GEO_DES_23 = ["coordenada_x_destino", "coordenada_y_destino"]
+
 DICT_GIS_07 = {
     "loc_domicilio": GEO_DOM,
     "loc_origem": GEO_ORI,
@@ -29,15 +33,23 @@ DICT_GIS_17 = {
     "loc_origem": GEO_ORI_17,
     "loc_destino": GEO_DES_17
 }
+DICT_GIS_23 = {
+    "loc_domicilio": GEO_DOM_23,
+    "loc_origem": GEO_ORI_23,
+    "loc_destino": GEO_DES_23
+}
+
+DICT_GIS = DICT_GIS_23
 
 
 def create_gis_point(df_raw: pd.DataFrame, dict_gis: Dict) -> gpd.GeoDataFrame:
     df_raw.dropna(subset=dict_gis["loc_domicilio"], inplace=True)
-    # print(dict_gis.values())
-    # df_raw[[list(dict_gis.values())]] = df_raw[[list(dict_gis.values())]].fillna(100)
     for k, v in dict_gis.items():
         df_raw[k] = gpd.points_from_xy(df_raw[v[0]], df_raw[v[1]])
-    gdf = gpd.GeoDataFrame(df_raw, crs = "EPSG:22523")
+    if df_raw.dtypes[df_raw.dtypes == 'geometry'].shape[0] > 1:
+        gdf = gpd.GeoDataFrame(df_raw,  geometry='loc_domicilio', crs = "EPSG:22523")
+    else:
+        gdf = gpd.GeoDataFrame(df_raw, crs = "EPSG:22523")
     return gdf
 
 
