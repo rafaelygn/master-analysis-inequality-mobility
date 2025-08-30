@@ -1,5 +1,6 @@
 geral:
   abs_path: /home/yoshraf/projects/master-analysis-inequality-mobility/inequality-mobility/
+  EPSG: 31983
 geodata:
   metro: data/01_raw/gis/SAD69-96_SHP_estacaometro.zip!SAD69-96_SHP_estacaometro/SAD69-96_SHP_estacaometro_point.shp
   trem: data/01_raw/gis/SAD69-96_SHP_estacaotrem.zip!SAD69-96_SHP_estacaotrem/SAD69-96_SHP_estacaotrem_point.shp
@@ -8,6 +9,7 @@ geodata:
   ponto_onibus: data/01_raw/gis/SAD69-96_SHP_pontoonibus.zip!SAD69-96_SHP_pontoonibus/SAD69-96_SHP_pontoonibus.shp
   ponto_cotado: data/01_raw/gis/PONTO_COTADO.zip!sad6996_PONTO_COTADO_INTERVIA.shp
   terminal: data/01_raw/gis/terminal_onibus.zip!sad6996_terminal_onibus.shp
+  od2023: data/01_raw/Banco2023_divulgacao_190225.sav
   od2017: data/01_raw/OD_2017.sav
   od2007: data/01_raw/OD_2007_v2d.sav
   # external
@@ -30,30 +32,27 @@ features:
       - baixa_outr
   od2007:
     features:
-      - Zona de Domicílio
-      - Município do Domicílio
-      - Coordenada X Domicílio
-      - Coordenada Y Domicílio
-      - Coordenada X Origem
-      - Coordenada Y Origem
-      - Coordenada X Destino
-      - Coordenada Y Destino
-      - Identifica Domicílo
-      - Número do Domicílio
-      - Data da Entrevista
-      - Número de Moradores no Domicílio
-      - Quantidade Automóvel
-      - Renda Familiar Mensal
-      - Identifica Pessoa
-      - Situação Familiar
-      - Idade
-      - Gênero
-      - Valor da Renda Individual
-      - Número da Viagem
-      - Total de Viagens internas
-      - Motivo na Origem
-      - Motivo no Destino
-      - Modo Principal
+      Zona de Domicílio: zona_do_domicilio
+      Município do Domicílio: municipio_de_domicilio
+      Coordenada X Domicílio: coordenada_x_do_domicilio
+      Coordenada Y Domicílio: coordenada_y_do_domicilio
+      Coordenada X Origem: coordenada_x_origem
+      Coordenada Y Origem: coordenada_y_origem
+      Coordenada X Destino: coordenada_x_destino
+      Coordenada Y Destino: coordenada_y_destino
+      Identifica Domicílo: identifica_domicilo
+      Data da Entrevista: data_da_entrevista
+      Número de Moradores no Domicílio: total_de_moradores_do_domicilio
+      Quantidade Automóvel: quantidade_de_automoveis
+      Renda Familiar Mensal: renda_familiar_mensal 
+      Identifica Pessoa: identifica_pessoa
+      Situação Familiar: situacao_familiar
+      Idade: idade_em_anos
+      Gênero: sexo
+      Número da Viagem: numero_de_ordem_do_registro
+      Total de Viagens internas: total_de_viagens_da_pessoa
+      Motivo no Destino: motivo_no_destino
+      Modo Principal: modo_principal_da_viagem
   od2017:
     features:
       # Domicílio
@@ -111,6 +110,64 @@ features:
       - Duração da Viagem (em minutos)
       - Modo Principal
       - Número de ordem do registro #ID
+  od2023:
+    features:
+      # Domicílio
+      - municipio_de_domicilio
+      - zona_do_domicilio
+      - coordenada_x_do_domicilio
+      - coordenada_y_do_domicilio
+      - identifica_domicilo
+      - data_da_entrevista
+      - tipo_de_domicilio
+      - possui_agua_encanada
+      - a_rua_e_pavimentada
+      - total_de_familias_no_domicilio
+      - total_de_moradores_do_domicilio
+      - condicao_de_moradia
+      - quantidade_de_banheiros
+      - quantidade_de_empregados
+      - quantidade_de_automoveis
+      - quantidade_de_motocicletas
+      - quantidade_de_bicicletas
+      - criterio_de_classificacao_econonica_brasil
+      - pontuacao_do_criterio_brasil
+      - renda_familiar_mensal
+      # Pessoa
+      - identifica_pessoa # ID Pessoa
+      - situacao_familiar # Responsável/Conjugue
+      - idade_em_anos
+      - sexo
+      # - raca/cor
+      - estuda_atualmente
+      - grau_de_instrucao
+      - condicao_de_atividade
+      - valor_da_renda_individual
+      # Viagem
+      - numero_da_viagem
+      - dia_da_semana
+      - total_de_viagens_da_pessoa
+      - coordenada_x_origem
+      - coordenada_y_origem
+      - coordenada_x_destino
+      - coordenada_y_destino
+      - motivo_na_origem
+      - motivo_no_destino
+      - servir_passageiro_na_origem
+      - servir_passageiro_no_destino
+      - modo_1
+      - modo_2
+      - modo_3
+      - modo_4
+      - hora_de_saida
+      - minuto_de_saida
+      - tempo_andando_na_origem
+      - hora_de_chegada
+      - minuto_de_chegada
+      - tempo_andando_no_destino
+      - duracao_da_viagem_em_minutos
+      - modo_principal_da_viagem
+      - numero_de_ordem_do_registro #ID
   od2017_socio:
     bens:
       - Quantidade de automóveis
@@ -118,6 +175,13 @@ features:
       - Quantidade de bicicletas
       - Renda familiar mensal
     per: Total de moradores na família
+  od2023_socio:
+    bens:
+      - quantidade_de_automoveis
+      - quantidade_de_motocicletas
+      - quantidade_de_bicicletas
+      - renda_familiar_mensal
+    per: total_de_moradores_do_domicilio
   diff-in-diffs:
     od2007:
       zone:
@@ -191,68 +255,78 @@ features:
     distance:
       treatment: 600
       treatment-max: 2000
-    
-
+  did:
+    subway:
+      entre_07e17:
+        central:
+          - FRADIQUE COUTINHO
+          - FARIA LIMA
+          - PINHEIROS
+          - BUTANTÃ
+        periferia:
+          - ORATÓRIO
+          - VILA PRUDENTE
+          - TAMANDUATEÍ
+          - SACOMÃ
+      entre_17e23:
+        central:
+          - CAMPO BELO
+          - HOSPITAL SÃO PAULO
+          - AACD-SERVIDOR
+          - MOEMA
+          - EUCALIPTOS
+        periferia:
+          # DURANTE
+          # - SÃO LUCAS
+          # - CAMILO HADDAD
+          # - VILA TOLSTÓI
+          # - VILA UNIÃO
+          # POS
+          - JARDIM PLANALTO
+          - SAPOPEMBA
+          - FAZENDA DA JUTA
+          - SÃO MATEUS
+          # - JARDIM COLONIAL
+          - VILA SÔNIA
 model_input:
   discrete_choice:
     columns:
       # Domicílio
-      - Zona de domicílio
-      - Data da entrevista
-      - Coordenada X domicílio
-      - Coordenada Y domicílio
+      - zona_do_domicilio
+      - data_da_entrevista
+      - coordenada_x_do_domicilio
+      - coordenada_y_do_domicilio
       # Pessoa
-      - Identifica pessoa # ID Pessoa
+      - identifica_pessoa
       # - Situação familiar # Responsável/Conjugue
-      - Idade
-      - Gênero
+      - idade_em_anos
+      - sexo
       # Viagem
       # - Dia da Semana
-      - Total de viagens da pessoa
-      - Motivo no Destino
-      - Hora Saída
+      - total_de_viagens_da_pessoa
+      - motivo_no_destino
+      - hora_de_saida
       # Novas Variáveis Gis
-      - loc_origem_count_parada
-      # - loc_origem_count_ilum_std
-      # - loc_origem_count_ilum_led
       - loc_origem_dist_metro
       - loc_origem_dist_trem
       - loc_origem_dist_term
       - loc_origem_dist_ciclo
-      # - loc_origem_A_L_TP_
-      # - loc_origem_A_L_TI_
-      # - loc_origem_A_E_60M_TP_
-      # - loc_origem_A_E_60M_TI_
-      # - loc_destino_count_parada
-      # - loc_destino_count_ilum_std
-      # - loc_destino_count_ilum_led
       - loc_destino_dist_metro
-      # - loc_destino_dist_trem
-      # - loc_destino_dist_term
-      # - loc_destino_dist_ciclo
-      # - loc_destino_A_L_TP_
-      # - loc_destino_A_L_TI_
-      # - loc_destino_A_E_60M_TP_
-      # - loc_destino_A_E_60M_TI_
       # Bens per capita
-      - per Quantidade de automóveis
-      - per Quantidade de motocicletas
-      - per Quantidade de bicicletas
-      - per Renda familiar mensal
+      - per_quantidade_de_automoveis
+      - per_quantidade_de_motocicletas
+      - per_quantidade_de_bicicletas
+      - per_renda_familiar_mensal
       # Final
       - dist_od
-      # - diff_cota_od
-      # - declividade
-      # - Entre 21-23
-      # - Entre 23-04
     idx:
-      - Identifica pessoa
-      - Zona de domicílio
-      - Data da entrevista
-      - Coordenada X domicílio
-      - Coordenada Y domicílio
+      - identifica_pessoa
+      - zona_do_domicilio
+      - data_da_entrevista
+      - coordenada_x_do_domicilio
+      - coordenada_y_do_domicilio
     label:
-      column: Modo Combinado
+      column: modo_principal_da_viagem
       values:
         - A pé
         - Automóvel
@@ -262,7 +336,7 @@ model_input:
         - Metrô/Trem+Ônibus
         - Transporte escolar
         - Taxi/Taxi App
-        - Dirigindo moto
+        - Motocicleta
         - Bicicleta
         # - Metrô/Trem+Automóvel
         - Outros
@@ -272,17 +346,17 @@ model_input:
       #   - Filho(a)/ enteado(a)
       #   - Conjugê/ companheiro(a)
     categorical:
-      - Gênero
-      - Motivo no Destino
+      - sexo
+      - motivo_no_destino
 
 modeling:
   map_class:
     A pé: 0
     Automóvel: 1
     Bicicleta: 2
-    Dirigindo moto: 3
-    Metrô/Trem: 4
-    Metrô/Trem+Ônibus: 5
+    Metrô/Trem: 3
+    Metrô/Trem+Ônibus: 4
+    Motocicleta: 5
     Outros: 6
     Taxi/Taxi App: 7
     Transporte escolar: 8

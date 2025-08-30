@@ -11,6 +11,10 @@ inauguracao:
   filepath: data/01_raw/inauguracoes.csv
 
 # Raw - Shapefiles Zipped
+od2023:
+  type: pandas.ParquetDataSet
+  filepath: data/02_intermediate/od2023.parquet
+
 od2017:
   type: pandas.ParquetDataSet
   filepath: data/02_intermediate/od2017.parquet
@@ -27,9 +31,9 @@ ciclovia:
   type: geopandas.GeoJSONDataSet
   filepath: data/02_intermediate/ciclovia.geojson
 
-ilumina:
-  type: geopandas.GeoJSONDataSet
-  filepath: data/02_intermediate/ilumina.geojson
+# ilumina:
+#   type: geopandas.GeoJSONDataSet
+#   filepath: data/02_intermediate/ilumina.geojson
 
 ponto_onibus:
   type: geopandas.GeoJSONDataSet
@@ -64,6 +68,14 @@ censo_demo:
   filepath: data/02_intermediate/censo_demo.geojson
 
 # Intermediate
+metro_final:
+  type: geopandas.GeoJSONDataSet
+  filepath: data/03_primary/metro_final.geojson
+
+od2023_filtered:
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/od2023_filtered.parquet
+
 od2017_filtered:
   type: pandas.ParquetDataSet
   filepath: data/03_primary/od2017_filtered.parquet
@@ -81,21 +93,21 @@ acc_joined:
   filepath: data/02_intermediate/acc_joined.geojson
 
 # Feature
-dataset_ilumina:
-  type: pandas.ParquetDataSet
-  filepath: data/04_feature/dataset_ilumina.parquet
+# dataset_ilumina:
+#   type: pandas.ParquetDataSet
+#   filepath: data/04_feature/dataset_ilumina.parquet
 
 dataset_eng:
   type: pandas.ParquetDataSet
   filepath: data/04_feature/dataset_eng.parquet
 
-dataset_cota:
-  type: pandas.ParquetDataSet
-  filepath: data/04_feature/dataset_cota.parquet
+# dataset_cota:
+#   type: pandas.ParquetDataSet
+#   filepath: data/04_feature/dataset_cota.parquet
 
-dataset_socio:
-  type: pandas.ParquetDataSet
-  filepath: data/04_feature/dataset_socio.parquet
+# dataset_socio:
+#   type: pandas.ParquetDataSet
+#   filepath: data/04_feature/dataset_socio.parquet
 
 dataset_final:
   type: pandas.ParquetDataSet
