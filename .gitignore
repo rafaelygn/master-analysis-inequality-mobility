@@ -4,10 +4,14 @@ data/
 data/gis/acessibilidade/Acessibilidade_Empregos/**
 .vscode/
 project/
-notebooks/
+*notebooks_bkp/
+inequality-mobility/notebook_bkp
 # Files
 **/.ipynb_checkpoints/**
 **/.ipynb_checkpoints
 **/__pycache__/**
 *.log
 *.pyc
+bibTex
+*.png
+*.Identifierinequality-mobility/notebooks/final/docs/maps/figs/*.tif
